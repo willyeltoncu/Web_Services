@@ -90,6 +90,12 @@
     function getFarenheitTemp(temp){
       return (9*temp/5)+32;
     }
+    function percentage(temp){
+      var rv = (temp/100) * 400; //height of 80px at 20% height means that 100% is 400px
+      //Create percentage that we want and multiply it by 400 to get px count
+      return rv;
+
+    }
 
     //run when the document object model is ready for javascript code to execute
 		$(document).ready(function() {
@@ -103,7 +109,8 @@
         var tempHead = document.getElementById("heading").innerHTML; //location
         var newHead = tempHead + " - " + data.location.name;
         document.getElementById("heading").innerHTML = newHead;
-        console.log(document.querySelector("#thermometer_inner").style);
+        var currentTemp = document.getElementById("thermometer_inner");
+        $(currentTemp).css("height", percentage(getFarenheitTemp(data.current.temperature)));
 
         document.getElementById("temp_today").innerHTML = getFarenheitTemp(data.current.temperature); //Temp_today
 
